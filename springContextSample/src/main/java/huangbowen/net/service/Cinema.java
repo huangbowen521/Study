@@ -3,9 +3,6 @@ package huangbowen.net.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by twer on 3/11/14.
- */
 @Component
 public class Cinema {
 
