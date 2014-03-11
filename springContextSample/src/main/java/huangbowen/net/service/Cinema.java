@@ -6,7 +6,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class Cinema {
 
+    public MovieService getMovieService() {
+        return movieService;
+    }
+
     @Autowired
+
     private MovieService movieService;
 
     public void printMovieName() {
