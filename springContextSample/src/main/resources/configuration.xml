@@ -5,9 +5,19 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="movieService" class="huangbowen.net.service.DefaultMovieService"/>
+    <bean id="movieService" name="service1,service2" class="huangbowen.net.service.DefaultMovieService"/>
+
+    <alias name="movieService" alias="service3"/>
+
+    <bean id="defaultMovieService" class="huangbowen.net.service.MovieServiceFactory" factory-method="GetMovieService" />
+
+
+    <bean id="serviceLocator" class="huangbowen.net.service.MovieServiceLocator"/>
+
+
+    <bean id="instantMovieService" factory-bean="serviceLocator" factory-method="GetMovieService"/>
 
     <bean id="cinema" class="huangbowen.net.service.Cinema">
-        <property name="movieService" ref="movieService"/>
+        <property name="movieService" ref="instantMovieService"/>
     </bean>
 </beans>
