@@ -1,5 +1,7 @@
 package huangbowen.net;
 
+import huangbowen.net.DependecyInjection.ConstructorInjection.MessageHandler;
+import huangbowen.net.DependecyInjection.ConstructorInjection.Person;
 import huangbowen.net.service.Cinema;
 import huangbowen.net.service.DefaultMovieService;
 import org.junit.Test;
@@ -9,6 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
@@ -22,6 +25,12 @@ public class XmlConfigurationTest {
 
     @Autowired
     private Cinema cinema;
+
+    @Autowired
+    private MessageHandler messageHandler;
+
+    @Autowired
+    private Person person;
 
     @Test
     public void shouldGetCinemaInstance()  {
@@ -40,5 +49,16 @@ public class XmlConfigurationTest {
         assertThat(cinema.getMovieService(), instanceOf(DefaultMovieService.class));
     }
 
+    @Test
+    public void shouldGetMessageHandler() {
+        assertNotNull(messageHandler);
+        assertThat(messageHandler.handle(), is("hello world!"));
+    }
 
+    @Test
+    public void shouldGetPerson() {
+        assertThat(person.getName(), is("Tom"));
+        assertThat(person.getAge(), is(20));
+
+    }
 }

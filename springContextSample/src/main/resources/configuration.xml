@@ -20,4 +20,27 @@
     <bean id="cinema" class="huangbowen.net.service.Cinema">
         <property name="movieService" ref="instantMovieService"/>
     </bean>
+
+    <bean id="messageService" class="huangbowen.net.DependecyInjection.ConstructorInjection.SimpleMessageService"/>
+    <bean id="messageHandler" class="huangbowen.net.DependecyInjection.ConstructorInjection.MessageHandler">
+        <constructor-arg ref="messageService"/>
+    </bean>
+
+    <!--<bean id="person" class="huangbowen.net.DependecyInjection.ConstructorInjection.Person">-->
+        <!--<constructor-arg index="0" value="Tom"/>-->
+        <!--<constructor-arg index="1" value="20"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="person" class="huangbowen.net.DependecyInjection.ConstructorInjection.Person">-->
+        <!--<constructor-arg type="java.lang.String" value="Tom"/>-->
+        <!--<constructor-arg type="int" value="20"/>-->
+    <!--</bean>-->
+
+    <bean id="person" class="huangbowen.net.DependecyInjection.ConstructorInjection.Person">
+        <constructor-arg name="name" value="Tom"/>
+        <constructor-arg name="age" value="20"/>
+    </bean>
+
+
+
 </beans>
