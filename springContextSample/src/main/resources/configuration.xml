@@ -37,9 +37,12 @@
     <!--</bean>-->
 
     <bean id="person" class="huangbowen.net.DependecyInjection.ConstructorInjection.Person">
-        <constructor-arg name="name" value="Tom"/>
+        <constructor-arg name="name">
+            <value>Tom</value>
+        </constructor-arg>
         <constructor-arg name="age" value="20"/>
     </bean>
+
 
 
 
