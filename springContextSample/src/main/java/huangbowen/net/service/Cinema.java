@@ -20,4 +20,14 @@ public class Cinema {
     public void printMovieName() {
         System.out.println(movieService.getMovieName());
     }
+
+    private String serviceRef;
+
+    public String getServiceRef() {
+        return serviceRef;
+    }
+
+    public void setServiceRef(String serviceRef) {
+        this.serviceRef = serviceRef;
+    }
 }

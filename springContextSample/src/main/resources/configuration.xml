@@ -10,7 +10,7 @@
 
     <alias name="movieService" alias="service3"/>
 
-    <bean id="defaultMovieService" class="huangbowen.net.service.MovieServiceFactory" factory-method="GetMovieService" />
+    <bean id="defaultMovieService" class="huangbowen.net.service.MovieServiceFactory" factory-method="GetMovieService"/>
 
 
     <bean id="serviceLocator" class="huangbowen.net.service.MovieServiceLocator"/>
@@ -18,8 +18,11 @@
 
     <bean id="instantMovieService" factory-bean="serviceLocator" factory-method="GetMovieService"/>
 
-    <bean id="cinema" class="huangbowen.net.service.Cinema">
+    <bean id="cinema" class="huangbowen.net.service.Cinema" depends-on="movieService,accountService">
         <property name="movieService" ref="instantMovieService"/>
+        <property name="serviceRef">
+            <idref bean="movieService"/>
+        </property>
     </bean>
 
     <bean id="messageService" class="huangbowen.net.DependecyInjection.ConstructorInjection.SimpleMessageService"/>
@@ -27,23 +30,56 @@
 
 
     <!--<bean id="person" class="huangbowen.net.DependecyInjection.ConstructorInjection.Person">-->
-        <!--<constructor-arg index="0" value="Tom"/>-->
-        <!--<constructor-arg index="1" value="20"/>-->
+    <!--<constructor-arg index="0" value="Tom"/>-->
+    <!--<constructor-arg index="1" value="20"/>-->
     <!--</bean>-->
 
     <!--<bean id="person" class="huangbowen.net.DependecyInjection.ConstructorInjection.Person">-->
-        <!--<constructor-arg type="java.lang.String" value="Tom"/>-->
-        <!--<constructor-arg type="int" value="20"/>-->
+    <!--<constructor-arg type="java.lang.String" value="Tom"/>-->
+    <!--<constructor-arg type="int" value="20"/>-->
     <!--</bean>-->
 
     <!--<bean id="person" class="huangbowen.net.DependecyInjection.ConstructorInjection.Person">-->
-        <!--<constructor-arg name="name">-->
-            <!--<value>Tom</value>-->
-        <!--</constructor-arg>-->
-        <!--<constructor-arg name="age" value="20"/>-->
+    <!--<constructor-arg name="name">-->
+    <!--<value>Tom</value>-->
+    <!--</constructor-arg>-->
+    <!--<constructor-arg name="age" value="20"/>-->
     <!--</bean>-->
 
-<bean id="person" class="huangbowen.net.DependecyInjection.ConstructorInjection.Person" c:_0="Tom" c:_1="20"/>
+    <bean id="person" class="huangbowen.net.DependecyInjection.ConstructorInjection.Person" c:_0="Tom" c:_1="20"/>
 
+    <bean id="accountService" class="huangbowen.net.service.AccountService">
+        <property name="accounts">
+            <map>
+                <entry key="bowen" value="1234"/>
+                <entry key="tom" value="3456"/>
+            </map>
+        </property>
+    </bean>
 
+    <bean id="cookbook" class="huangbowen.net.service.Cookbook">
+        <property name="recipe">
+            <list>
+                <value>noodle</value>
+                <value>rice</value>
+                <value>meat</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="databaseSource" class="huangbowen.net.service.DatabaseSource">
+        <property name="source">
+            <props>
+                <prop key="port">2012</prop>
+                <prop key="host">localhost</prop>
+                <prop key="schema">db1</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="restaurant" class="huangbowen.net.service.Restaurant">
+        <property name="manager">
+            <bean class="huangbowen.net.PAndCNamespace.Person"/>
+        </property>
+        <property name="manager.age" value="20"/>
+    </bean>
 </beans>
