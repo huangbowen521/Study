@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="animal" abstract="true">
+        <property name="legs" value="4"/>
+    </bean>
+
+    <bean id="monkey" parent="animal" class="huangbowen.net.service.Animal">
+        <property name="name" value="dudu"/>
+    </bean>
+
+    <bean id="smartMonkey" class="huangbowen.net.service.Monkey" parent="animal">
+        <property name="name" value="smallDudu"/>
+        <property name="canDrawing" value="true"/>
+    </bean>
+
+
+    <bean id="sampleAccounts" abstract="true">
+        <property name="accounts">
+            <map>
+                <entry key="Bob" value="001"/>
+                <entry key="John" value="002"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="accountService" parent="sampleAccounts" class="huangbowen.net.service.AccountService">
+        <property name="accounts">
+            <map merge="true">
+                <entry key="Michael" value="003"/>
+                <entry key="Joel" value="004"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>
